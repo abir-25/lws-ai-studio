@@ -50,7 +50,7 @@ export default function SettingsPanel() {
     setAspectRatio(ratio);
     const [w, h] = ratio.split(":").map(Number);
 
-    const baseSize = 1024;
+    const baseSize = searchParams.width;
     const scale = baseSize / Math.max(w, h);
     const width = Math.round(w * scale);
     const height = Math.round(h * scale);
