@@ -47,7 +47,6 @@ export default function ImageContainer() {
       progress: undefined,
     });
   };
-  console.log(imageData);
 
   return (
     <div>

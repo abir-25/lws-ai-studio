@@ -18,6 +18,21 @@ export function generateRandomPrompt() {
     "A close-up of a blooming flower with dew drops",
     "A dramatic stormy sky over a calm sea",
     "A futuristic robot in a high-tech laboratory",
+    "A peaceful Zen garden with raked sand and stones",
+    "A colorful hot air balloon festival in the countryside",
+    "A fantasy castle on a hilltop surrounded by clouds",
+    "A bustling Tokyo street with neon lights",
+    "A serene lake reflecting autumn foliage",
+    "A magical winter wonderland with snowflakes falling",
+    "A surreal dreamscape with floating islands",
+    "A vibrant carnival parade with dancers and floats",
+    "A cozy coffee shop with people reading and chatting",
+    "A majestic eagle soaring over a canyon",
+    "A futuristic space station orbiting a distant planet",
+    "A peaceful village with thatched-roof cottages",
+    "A dramatic cliffside view overlooking the ocean",
+    "A colorful street art mural in an urban setting",
+    "A tranquil river winding through a lush forest",
   ];
   for (let i = prompts.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));

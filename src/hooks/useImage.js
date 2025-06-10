@@ -1,11 +1,10 @@
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { SearchContext } from "../context";
 import { generateRandomSeeds } from "../utils";
 
 const TOTAL_IMAGES = 9;
 
 const useImage = () => {
-  const indexRef = useRef(0);
   const [pageStatus, setPageStatus] = useState("empty");
   const [imageData, setImageData] = useState(
     Array.from({ length: TOTAL_IMAGES }, () => ({
@@ -19,16 +18,14 @@ const useImage = () => {
   const { searchParams } = useContext(SearchContext);
 
   useEffect(() => {
-    if (pageStatus === "empty") {
-      console.log(
-        "Resetting image data due to page status change:",
-        pageStatus
+    if (pageStatus === "empty" || pageStatus === "loading") {
+      setImageData(
+        Array.from({ length: TOTAL_IMAGES }, () => ({
+          status: "idle",
+          url: null,
+          message: "",
+        }))
       );
-      Array.from({ length: TOTAL_IMAGES }, () => ({
-        status: "idle",
-        url: null,
-        message: "",
-      }));
     }
   }, [pageStatus]);
 
@@ -37,10 +34,10 @@ const useImage = () => {
 
     if (pressEnter) {
       let flag = 1;
+      let index = 0;
 
-      console.log("started fetching images");
       const fetchImageWithDelay = async () => {
-        const currentIndex = indexRef.current;
+        const currentIndex = index;
 
         if (!isMounted || currentIndex >= TOTAL_IMAGES) return;
 
@@ -49,7 +46,6 @@ const useImage = () => {
             idx === currentIndex ? { ...img, status: "loading" } : img
           )
         );
-        console.log("started first image fetch", currentIndex);
 
         const seed = generateRandomSeeds();
         const imageUrl = `https://image.pollinations.ai/prompt/${searchParams.prompt}?model=${searchParams.model}&width=${searchParams.width}&height=${searchParams.height}&seed=${seed}`;
@@ -73,11 +69,10 @@ const useImage = () => {
             };
             return newData;
           });
-          console.log("Image fetched successfully", currentIndex, objectUrl);
 
-          indexRef.current += 1;
+          index += 1;
 
-          if (indexRef.current < TOTAL_IMAGES) {
+          if (index < TOTAL_IMAGES) {
             setTimeout(fetchImageWithDelay, 5000);
           }
         } catch (error) {
@@ -88,9 +83,9 @@ const useImage = () => {
                 : img
             )
           );
-          indexRef.current += 1;
+          index += 1;
 
-          if (indexRef.current < TOTAL_IMAGES) {
+          if (index < TOTAL_IMAGES) {
             setTimeout(fetchImageWithDelay, 5000);
           }
         }

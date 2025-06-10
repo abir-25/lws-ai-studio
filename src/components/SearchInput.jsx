@@ -16,11 +16,6 @@ export default function SearchInput() {
   const promptTemplates = generateRandomPrompt();
   const handleSearchInput = (e) => {
     setPrompt(e.target.value);
-    if (hasTriggered) {
-      setHasTriggered(false);
-      setPressEnter(false);
-      setPageStatus("empty");
-    }
   };
 
   const handleSend = () => {
@@ -47,7 +42,6 @@ export default function SearchInput() {
     setPressEnter(false);
     setPageStatus("empty");
     setHasTriggered(false);
-    setPrompt("");
   };
 
   return (
