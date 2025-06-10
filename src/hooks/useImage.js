@@ -35,6 +35,10 @@ const useImage = () => {
     if (pressEnter) {
       let flag = 1;
       let index = 0;
+      if (flag === 1) {
+        setPageStatus("display");
+      }
+      flag = 0;
 
       const fetchImageWithDelay = async () => {
         const currentIndex = index;
@@ -56,10 +60,7 @@ const useImage = () => {
 
           const blob = await response.blob();
           const objectUrl = URL.createObjectURL(blob);
-          if (flag === 1) {
-            setPageStatus("display");
-          }
-          flag = 0;
+
           setImageData((prev) => {
             const newData = [...prev];
             newData[currentIndex] = {

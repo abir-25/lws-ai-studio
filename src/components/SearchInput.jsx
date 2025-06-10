@@ -28,7 +28,6 @@ export default function SearchInput() {
       prompt: prompt,
     }));
     setPressEnter(true);
-    setPageStatus("loading");
     setHasTriggered(true);
   };
 

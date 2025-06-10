@@ -18,14 +18,6 @@ export default function ImageContainer() {
         </p>
       </div>
     );
-  } else if (pageStatus === "loading") {
-    return (
-      <div className="flex items-center justify-center h-full">
-        <p className="text-white mt-4 text-lg">
-          Generating images, please wait...
-        </p>
-      </div>
-    );
   }
 
   const handleDownload = (url) => {
